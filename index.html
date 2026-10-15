@@ -68,6 +68,14 @@ header{
 .brand h1{font-size:22px;font-weight:700;letter-spacing:.04em}
 .brand .sub{font-size:13px;color:var(--ink-2);margin-top:3px;letter-spacing:.08em}
 .brand .sub b{color:var(--green);font-weight:600}
+.hd-right{display:flex;align-items:center;gap:16px;flex:0 0 auto}
+.visit-top{
+  font-size:13px;color:var(--ink-2);letter-spacing:.03em;white-space:nowrap;
+}
+.visit-top b{
+  font-size:17px;font-weight:700;color:var(--green);
+  margin:0 4px;font-variant-numeric:tabular-nums;
+}
 .theme-btn{
   flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink-2);
   font-family:inherit;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer;
@@ -77,12 +85,21 @@ header{
 .theme-btn svg{width:15px;height:15px}
 /* ===== 主体 ===== */
 main{max-width:920px;margin:0 auto;padding:34px 20px 60px}
-/* 搜索区 */
-.search-box{
+/* 查询区（选项卡） */
+.query-box{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  box-shadow:var(--shadow);padding:26px 26px 22px;
+  box-shadow:var(--shadow);padding:16px 26px 22px;
 }
-.search-box .tip{font-size:13px;color:var(--ink-3);margin-bottom:14px;letter-spacing:.02em}
+.tabs{display:flex;gap:8px;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:12px;flex-wrap:wrap}
+.tab{
+  font-family:inherit;font-size:15px;font-weight:600;color:var(--ink-2);
+  background:none;border:1px solid transparent;padding:7px 20px;border-radius:999px;cursor:pointer;
+  transition:all .2s;
+}
+.tab:hover{color:var(--green);border-color:var(--line)}
+.tab.active{background:var(--green);color:#FBF7EC;border-color:var(--green)}
+.hidden{display:none}
+.tip{font-size:13px;color:var(--ink-3);margin-bottom:14px;letter-spacing:.02em}
 .search-row{display:flex;gap:10px}
 .search-input{
   flex:1;font-family:inherit;font-size:18px;color:var(--ink);
@@ -115,6 +132,79 @@ main{max-width:920px;margin:0 auto;padding:34px 20px 60px}
   font-size:13px;color:var(--ink-2);
 }
 .stats .num{font-size:19px;font-weight:700;color:var(--green);margin-right:6px;font-variant-numeric:tabular-nums}
+/* ===== 條件查詢 ===== */
+.filter-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.filter-title{font-size:16px;font-weight:700;letter-spacing:.06em}
+.filter-title .dot{display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--green);margin-right:8px}
+.filter-sub{font-size:13px;color:var(--ink-3)}
+.filter-row{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end}
+.f-item{display:flex;flex-direction:column;gap:5px}
+.f-item label{font-size:11px;color:var(--ink-3);letter-spacing:.05em}
+.combo{
+  position:relative;display:flex;align-items:center;
+  width:106px;
+  border:1.5px solid var(--line);border-radius:var(--radius);background:var(--paper);
+  transition:border-color .2s,box-shadow .2s;
+}
+.combo:focus-within{border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+.combo input{
+  flex:1;min-width:64px;border:none;background:none;outline:none;
+  font-family:inherit;font-size:14px;color:var(--ink);
+  padding:9px 2px 9px 8px;
+}
+.combo input::placeholder{color:var(--ink-3);font-size:13px}
+.combo-arrow{
+  flex:0 0 auto;border:none;background:none;color:var(--ink-3);cursor:pointer;
+  padding:0 4px;height:100%;display:flex;align-items:center;
+  transition:color .2s;
+}
+.combo-arrow:hover{color:var(--green)}
+.combo-list{
+  position:absolute;top:calc(100% + 3px);left:0;z-index:60;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);max-height:220px;overflow-y:auto;
+  min-width:150px;max-width:240px;
+}
+.combo-item{
+  padding:7px 10px;font-size:14px;cursor:pointer;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:background .15s,color .15s;
+}
+.combo-item:hover{background:var(--green-soft);color:var(--green)}
+.combo-empty{padding:10px 12px;font-size:13px;color:var(--ink-3);text-align:center}
+.f-btns{display:flex;flex-direction:row;gap:10px;align-items:center}
+.filter-btn{
+  font-family:inherit;font-size:14px;font-weight:600;color:#FBF7EC;
+  background:var(--green);border:none;border-radius:var(--radius);
+  padding:10px 14px;cursor:pointer;transition:background .2s;
+}
+.filter-btn:hover{background:var(--green-deep)}
+.filter-btn.ghost{background:transparent;color:var(--green);border:1.5px solid var(--green);padding:8.5px 12px}
+.filter-btn.ghost:hover{background:var(--green-soft)}
+.filter-result-head{display:flex;align-items:baseline;gap:12px;margin:20px 0 10px;flex-wrap:wrap}
+.filter-result-head .count{font-size:14px;font-weight:700;color:var(--green)}
+.filter-result-head .more{font-size:12px;color:var(--ink-3)}
+.f-table{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.f-row{
+  display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  align-items:center;
+}
+.f-row.f-head{background:var(--paper-2);font-weight:700}
+.f-cell{
+  padding:9px 12px;font-size:14px;border-top:1px solid var(--line);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.f-row.f-head .f-cell{border-top:none;color:var(--ink-2);font-size:13px;letter-spacing:.05em}
+.f-row:not(.f-head):hover{background:var(--green-soft)}
+.f-cell.f-char{font-weight:700}
+.f-char-btn{
+  font-family:inherit;font-size:15px;font-weight:700;color:var(--green);
+  background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;
+  text-underline-offset:3px;transition:color .2s;
+}
+.f-char-btn:hover{color:var(--green-deep)}
+.empty.small{padding:36px 20px}
+.empty.small .big{font-size:26px}
 /* 结果区 */
 #resultArea{min-height:120px}
 .result-head{
@@ -160,20 +250,50 @@ main{max-width:920px;margin:0 auto;padding:34px 20px 60px}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 /* ===== 页脚 ===== */
 footer{
-  border-top:1px solid var(--line);padding:22px 20px 34px;
+  border-top:1px solid var(--line);padding:26px 20px 34px;
   font-size:12px;color:var(--ink-3);text-align:center;line-height:2;
 }
 footer b{color:var(--ink-2);font-weight:600}
+.feedback{
+  max-width:920px;margin:0 auto 22px;padding:18px 22px;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  text-align:left;
+}
+.fb-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:.06em}
+.fb-title .dot{display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--green);margin-right:8px}
+.fb-desc{font-size:13px;color:var(--ink-2);line-height:1.8;max-width:600px}
+.fb-tip{margin-top:6px;font-size:12px;color:var(--ink-3)}
+.fb-btn{
+  flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;
+  font-family:inherit;font-size:14px;font-weight:600;color:#FBF7EC;
+  background:var(--green);border-radius:var(--radius);padding:11px 20px;
+  text-decoration:none;transition:background .2s;
+}
+.fb-btn:hover{background:var(--green-deep)}
+.fb-btn svg{width:15px;height:15px}
+.foot-meta{max-width:920px;margin:0 auto}
+.foot-meta .visit{color:var(--green);font-weight:700}
 /* ===== 响应式 ===== */
 @media (max-width:720px){
   .hd-inner{padding:20px 16px 18px}
   .brand h1{font-size:18px}
+  .hd-right{gap:10px}
+  .visit-top{font-size:12px}
+  .visit-top b{font-size:15px}
   .grid{grid-template-columns:repeat(2,1fr);gap:12px 16px}
-  .search-box{padding:20px 16px 18px}
+  .query-box{padding:14px 16px 18px}
   .search-btn{padding:0 16px}
   .stats{gap:16px}
   .tip,.examples,.stats{font-size:14px}
   .cell .k{font-size:13px}
+  .feedback{flex-direction:column;align-items:flex-start}
+  .fb-btn{width:100%;justify-content:center}
+  .combo{width:auto;min-width:96px}
+  .combo input{min-width:76px}
+  .f-table{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .f-row{min-width:640px}
   main{padding:24px 14px 50px}
 }
 @media (max-width:420px){
@@ -194,30 +314,60 @@ footer b{color:var(--ink-2);font-weight:600}
         <div class="sub">單字查詢 · 音韻地位一目了然</div>
       </div>
     </div>
-    <button class="theme-btn" id="themeBtn" aria-label="切换亮暗模式">
-      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
-      <span id="themeLabel">暗色</span>
-    </button>
+    <div class="hd-right">
+      <div class="visit-top">今日訪問 <b id="todayVisit">0</b> 人次</div>
+      <button class="theme-btn" id="themeBtn" aria-label="切换亮暗模式">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
+        <span id="themeLabel">暗色</span>
+      </button>
+    </div>
   </div>
 </header>
 
 <main>
-  <section class="search-box">
-    <div class="tip">輸入單個漢字，即可查詢其在方言調查字表中的全部音韻地位信息</div>
-    <div class="search-row">
-      <input class="search-input" id="kw" type="text" placeholder="例：多、拖、他、駝……" maxlength="8" autocomplete="off" enterkeyhint="search">
-      <button class="search-btn" id="goBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></svg>
-        查詢
-      </button>
+  <section class="query-box">
+    <div class="tabs">
+      <button class="tab active" data-mode="single">單字查詢</button>
+      <button class="tab" data-mode="filter">條件查詢</button>
     </div>
-    <div class="examples">示例：
-      <button data-kw="多">多</button>
-      <button data-kw="拖">拖</button>
-      <button data-kw="他">他</button>
-      <button data-kw="駝">駝</button>
-      <button data-kw="波">波</button>
-      <button data-kw="記">記</button>
+    <div id="panel-single">
+      <div class="tip">輸入單個漢字，即可查詢其在方言調查字表中的全部音韻地位信息</div>
+      <div class="search-row">
+        <input class="search-input" id="kw" type="text" placeholder="例：多、拖、他、駝……" maxlength="8" autocomplete="off" enterkeyhint="search">
+        <button class="search-btn" id="goBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></svg>
+          查詢
+        </button>
+      </div>
+      <div class="examples">示例：
+        <button data-kw="多">多</button>
+        <button data-kw="拖">拖</button>
+        <button data-kw="他">他</button>
+        <button data-kw="駝">駝</button>
+        <button data-kw="波">波</button>
+        <button data-kw="記">記</button>
+      </div>
+    </div>
+    <div id="panel-filter" class="hidden">
+      <div class="filter-head">
+        <span class="filter-title"><span class="dot"></span>條件查詢</span>
+        <span class="filter-sub">按音韻地位多條件組合篩選字頭，可下拉選擇或直接輸入</span>
+      </div>
+      <div class="filter-row">
+        <div class="f-item"><label>聲紐</label><div class="combo"><input id="f-shengniu" placeholder="可輸入" autocomplete="off"><button class="combo-arrow" type="button" aria-label="展開選項"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="combo-list hidden"></div></div></div>
+        <div class="f-item"><label>韻目</label><div class="combo"><input id="f-yunmu" placeholder="可輸入" autocomplete="off"><button class="combo-arrow" type="button" aria-label="展開選項"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="combo-list hidden"></div></div></div>
+        <div class="f-item"><label>聲調</label><div class="combo"><input id="f-shengdiao" placeholder="可輸入" autocomplete="off"><button class="combo-arrow" type="button" aria-label="展開選項"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="combo-list hidden"></div></div></div>
+        <div class="f-item"><label>開合</label><div class="combo"><input id="f-kaihe" placeholder="可輸入" autocomplete="off"><button class="combo-arrow" type="button" aria-label="展開選項"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="combo-list hidden"></div></div></div>
+        <div class="f-item"><label>等第</label><div class="combo"><input id="f-dengdi" placeholder="可輸入" autocomplete="off"><button class="combo-arrow" type="button" aria-label="展開選項"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="combo-list hidden"></div></div></div>
+        <div class="f-item"><label>韻攝</label><div class="combo"><input id="f-yunshe" placeholder="可輸入" autocomplete="off"><button class="combo-arrow" type="button" aria-label="展開選項"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="combo-list hidden"></div></div></div>
+        <div class="f-item f-btns">
+          <button class="filter-btn" id="filterGo">查詢</button>
+          <button class="filter-btn ghost" id="filterReset">清空</button>
+        </div>
+      </div>
+      <div id="filterArea">
+        <div class="empty small"><div class="big">條 件 查 詢</div><p>選擇或輸入音韻地位條件，點擊查詢篩選字頭</p></div>
+      </div>
     </div>
   </section>
 
@@ -237,8 +387,20 @@ footer b{color:var(--ink-2);font-weight:600}
 </main>
 
 <footer>
-  數據來源：方言調查字表（轉一列5246字） · 共 <b>4,910</b> 字頭 / <b>5,249</b> 條讀音<br>
-  單字查詢 · 數據內嵌於本頁，無需網絡亦可使用
+  <div class="feedback">
+    <div class="fb-txt">
+      <div class="fb-title"><span class="dot"></span>反饋建議</div>
+      <div class="fb-desc">對本字表的數據或查詢功能有任何修改、調整建議，歡迎前往微信公眾號，在文章評論區留言反饋。</div>
+      <div class="fb-tip">提示：評論功能需在微信內打開方可使用</div>
+    </div>
+    <a class="fb-btn" href="https://mp.weixin.qq.com/s/qd_Xrj__sIzOgSKchQVNsA" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.35 9 9 0 0 1-3.2-.6L3 20.5l1.2-3.1A8.38 8.38 0 0 1 3 11.5a8.5 8.5 0 0 1 9-8.5 8.38 8.38 0 0 1 9 8.5z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>
+      前往公眾號留言
+    </a>
+  </div>
+  <div class="foot-meta">
+    數據來源：方言調查字表 · 共 <b>4,910</b> 字頭 / <b>5,249</b> 條讀音
+  </div>
 </footer>
 
 <div id="toast"></div>
@@ -329,6 +491,143 @@ function doSearch(){
   renderResults(raw, RAW_DATA[raw] || null);
 }
 
+/* ===== 條件查詢 ===== */
+const FILTER_FIELDS = [
+  {key:"聲紐", id:"f-shengniu"},
+  {key:"韻目", id:"f-yunmu"},
+  {key:"声调", id:"f-shengdiao"},
+  {key:"開合", id:"f-kaihe"},
+  {key:"等第", id:"f-dengdi"},
+  {key:"韻攝", id:"f-yunshe"}
+];
+const FIELD_ORDER = {
+  "声调": ["平","上","去","入"],
+  "開合": ["開","合"],
+  "等第": ["一","二","三","四"],
+  "韻攝": ["果","假","遇","蟹","止","效","流","咸","深","山","臻","宕","江","曾","梗","通"],
+  "聲紐": ["幫","滂","並","明","非","敷","奉","微","端","透","定","泥（娘）","知","徹","澄","精","清","從","心","邪","照【章】","照【莊】","穿【初】","穿【昌】","牀【崇】","牀【船】","審【書】","審【生】","禪","日","見","溪","群","疑","影","曉","匣","喻【云】","喻【以】","來"]
+};
+function fieldSort(f, a, b){
+  const ord = FIELD_ORDER[f.key];
+  if(ord){
+    const ia = ord.indexOf(a), ib = ord.indexOf(b);
+    if(ia>=0 && ib>=0) return ia-ib;
+    if(ia>=0) return -1;
+    if(ib>=0) return 1;
+  }
+  return a.localeCompare(b, "zh");
+}
+function collectOptions(){
+  FILTER_FIELDS.forEach(f=>{
+    const set = new Set();
+    for(const ch in RAW_DATA){
+      RAW_DATA[ch].forEach(r=>{ if(r[f.key]) set.add(r[f.key]); });
+    }
+    f.options = [...set].sort((a,b)=>fieldSort(f,a,b));
+  });
+}
+function initCombo(f){
+  const input = document.getElementById(f.id);
+  const wrap = input.closest(".combo");
+  const list = wrap.querySelector(".combo-list");
+  const arrow = wrap.querySelector(".combo-arrow");
+  let open = false;
+  function render(filter){
+    list.innerHTML = "";
+    const items = f.options.filter(o=>!filter || o.indexOf(filter)>=0);
+    if(!items.length){
+      const d = document.createElement("div");
+      d.className = "combo-empty";
+      d.textContent = "無匹配選項";
+      list.appendChild(d);
+      return;
+    }
+    items.forEach(o=>{
+      const li = document.createElement("div");
+      li.className = "combo-item";
+      li.textContent = o;
+      li.addEventListener("mousedown", e=>{ e.preventDefault(); });
+      li.addEventListener("click", ()=>{
+        input.value = o;
+        close();
+      });
+      list.appendChild(li);
+    });
+  }
+  function openList(){ render(input.value.trim()); list.classList.remove("hidden"); open = true; }
+  function close(){ list.classList.add("hidden"); open = false; }
+  input.addEventListener("focus", openList);
+  input.addEventListener("input", ()=>{ if(open) render(input.value.trim()); });
+  arrow.addEventListener("click", e=>{
+    e.stopPropagation();
+    if(open) close(); else openList();
+  });
+  input.addEventListener("keydown", e=>{ if(e.key==="Escape") close(); });
+  document.addEventListener("click", e=>{ if(!wrap.contains(e.target)) close(); });
+}
+function doFilter(){
+  const conds = FILTER_FIELDS
+    .map(f=>({key:f.key, val:document.getElementById(f.id).value.trim()}))
+    .filter(c=>c.val);
+  if(!conds.length){ showToast("請至少填寫一個篩選條件"); return; }
+  const hits = [];
+  for(const ch in RAW_DATA){
+    RAW_DATA[ch].forEach(r=>{
+      if(conds.every(c=>r[c.key]===c.val)) hits.push({ch:ch, rec:r});
+    });
+  }
+  renderFilter(hits);
+}
+function renderFilter(hits){
+  const area = document.getElementById("filterArea");
+  if(!hits.length){
+    area.innerHTML = '<div class="empty small"><div class="big">無 匹 配</div><p>無字頭符合所選條件，請調整篩選條件</p></div>';
+    return;
+  }
+  const total = hits.length;
+  const shown = hits.slice(0,100);
+  const head = '<div class="f-row f-head"><div class="f-cell">字</div><div class="f-cell">聲紐</div><div class="f-cell">韻目</div><div class="f-cell">聲調</div><div class="f-cell">開合</div><div class="f-cell">等第</div><div class="f-cell">韻攝</div></div>';
+  const rows = shown.map(h=>{
+    const r = h.rec;
+    const vals = [h.ch, r.聲紐, r.韻目, r.声调, r.開合, r.等第, r.韻攝];
+    return '<div class="f-row">'+
+      '<div class="f-cell f-char"><button class="f-char-btn" data-ch="'+esc(h.ch)+'">'+esc(h.ch)+'</button></div>'+
+      vals.slice(1).map(v=>'<div class="f-cell">'+esc(v||"—")+'</div>').join('')+
+      '</div>';
+  }).join('');
+  area.innerHTML =
+    '<div class="filter-result-head"><span class="count">命中 '+total+' 條讀音</span>'+
+    (total>100?'<span class="more">僅顯示前 100 條，可增加篩選條件縮小範圍</span>':'')+'</div>'+
+    '<div class="f-table">'+head+rows+'</div>';
+  area.querySelectorAll(".f-char-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      switchMode("single");
+      $("kw").value = btn.dataset.ch;
+      doSearch();
+      document.getElementById("resultArea").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  });
+}
+function resetFilter(){
+  FILTER_FIELDS.forEach(f=>{ document.getElementById(f.id).value = ""; });
+  document.getElementById("filterArea").innerHTML =
+    '<div class="empty small"><div class="big">條 件 查 詢</div><p>選擇或輸入音韻地位條件，點擊查詢篩選字頭</p></div>';
+}
+function switchMode(mode){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t.dataset.mode===mode));
+  document.getElementById("panel-single").classList.toggle("hidden", mode!=="single");
+  document.getElementById("panel-filter").classList.toggle("hidden", mode!=="filter");
+  document.getElementById("resultArea").classList.toggle("hidden", mode!=="single");
+  if(mode==="single") $("kw").focus();
+}
+document.querySelectorAll(".tab").forEach(t=>{
+  t.addEventListener("click", ()=>switchMode(t.dataset.mode));
+});
+document.getElementById("filterGo").addEventListener("click", doFilter);
+document.getElementById("filterReset").addEventListener("click", resetFilter);
+collectOptions();
+FILTER_FIELDS.forEach(initCombo);
+
 /* ===== 事件 ===== */
 $("goBtn").addEventListener("click", doSearch);
 $("kw").addEventListener("keydown", e=>{ if(e.key==="Enter") doSearch(); });
@@ -360,6 +659,29 @@ themeBtn.addEventListener("click", ()=>{
 
 /* 初始焦點 */
 $("kw").focus();
+
+/* ===== 今日訪問人次 ===== */
+function todayStr(){
+  const d = new Date();
+  const y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
+  return y+"-"+((m<10)?"0":"")+m+"-"+((day<10)?"0":"")+day;
+}
+function initTodayVisit(){
+  let date = null, num = 0;
+  try{
+    date = localStorage.getItem("fy_visit_date");
+    num = Number(localStorage.getItem("fy_visit_num")) || 0;
+  }catch(e){}
+  const today = todayStr();
+  num = (date !== today) ? 1 : (num + 1);
+  try{
+    localStorage.setItem("fy_visit_date", today);
+    localStorage.setItem("fy_visit_num", String(num));
+  }catch(e){}
+  const el = document.getElementById("todayVisit");
+  if(el) el.textContent = String(num);
+}
+initTodayVisit();
 </script>
 </body>
 </html>
